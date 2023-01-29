@@ -32,6 +32,9 @@ let getCityWeather = async function(city) {
             let weatherResponse = await fetch(weatherApiUrl);
             let weatherData = await weatherResponse.json();
             // Pull relevant data from the API: temp, humidity, wind speed, and icon
+            let date = new Date(weatherData.dt * 1000);
+            let currentDate = date.toLocaleDateString();
+            console.log(currentDate);
             let currentTemperture = weatherData.main.temp;
             let currentHumidity = weatherData.main.humidity;
             let currentWindSpeed = weatherData.wind.speed;
