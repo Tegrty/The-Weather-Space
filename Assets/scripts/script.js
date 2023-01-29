@@ -3,6 +3,7 @@ let cityInputEl = document.querySelector('#city');
 let currentWeatherEl = document.querySelector('#current-weather');
 let futureWeatherEl = document.querySelector('#future-weather');
 let searchBtn = document.querySelector('#searchBtn');
+let forecastWeatherEl = document.querySelector('#forecast-weather');
 
 let formSubmitHandler = function(event) {
     event.preventDefault();
@@ -40,9 +41,10 @@ let getCityWeather = async function(city) {
             let currentWindSpeed = weatherData.wind.speed;
             let currentIcon = weatherData.weather[0].icon;
             console.log(currentTemperture, currentHumidity, currentWindSpeed, currentIcon);
-            //add function to dynamically display currentDate, currentTemperture, currentHumidity, currentWindSpeed, and currentIcon to the #current-weather div
+            // Display the current weather data dynamically in #current-weather
             currentWeatherEl.innerHTML = `
-            <p>Date: ${currentDate}</p>
+            <h2> ${city.toUpperCase()} </h2>
+            <h3>Date: ${currentDate}</h3>
             <p>Temperature: ${currentTemperture}°C</p>
             <p>Humidity: ${currentHumidity}%</p>
             <p>Wind Speed: ${currentWindSpeed}m/s</p>
@@ -72,8 +74,18 @@ let getCityWeather = async function(city) {
                 console.log("Humidity: " + forecastHumidity);
                 console.log("Wind Speed: " + forecastWindSpeed);
                 console.log("Icon: " + forecastIcon);
-
+                // Display the forecast data dynamically in #future-weather
+                $(forecastWeatherEl).append(`
+                <div class="forecast-card">
+                    <h3>${city.toUpperCase()}</h3>
+                    <h4>${forecastDate.toLocaleDateString()}</h4>
+                    <p>Temperature: ${forecastTemperture}°C</p>
+                    <p>Humidity: ${forecastHumidity}%</p>
+                    <p>Wind Speed: ${forecastWindSpeed}m/s</p>
+                    <img src="http://openweathermap.org/img/wn/${forecastIcon}@2x.png">
+                </div>
                 
+            `);
 
             }
         } else {
