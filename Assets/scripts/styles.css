@@ -1,0 +1,15 @@
+#current-weather {
+    background-color: rgb(164, 130, 196);
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 25%;
+    flex-direction: column;
+  }
+  
+  #current-weather p, #current-weather img {
+    color: white;
+  }
+  
