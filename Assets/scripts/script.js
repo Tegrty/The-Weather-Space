@@ -7,6 +7,7 @@ let forecastWeatherEl = document.querySelector('#forecast-weather');
 
 let formSubmitHandler = function(event) {
     event.preventDefault();
+    clearPreviousForecast();
     let city = cityInputEl.value.trim();
     console.log(city);
     if (city) {
@@ -83,9 +84,8 @@ let getCityWeather = async function(city) {
                     <p>Humidity: ${forecastHumidity}%</p>
                     <p>Wind Speed: ${forecastWindSpeed}m/s</p>
                     <img src="http://openweathermap.org/img/wn/${forecastIcon}@2x.png">
-                </div>
-                
-            `);
+                </div>`
+            );
 
             }
         } else {
@@ -96,6 +96,8 @@ let getCityWeather = async function(city) {
     }
 };
 
-
+let clearPreviousForecast = function() {
+    forecastWeatherEl.innerHTML = "";
+};
 
 searchFormEl.addEventListener('submit', formSubmitHandler);
