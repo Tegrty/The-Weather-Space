@@ -17,7 +17,7 @@ let formSubmitHandler = function(event) {
 };
 // Fetching the weather data from the API - aync function allows the use of await
 let getCityWeather = async function(city) {
-    let apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=5&appid=baa97083d89e9450d3519e9d509f7876";
+    let apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=5&appid=baa97083d89e9450d3519e9d509f7876&units=metric";
 
     try {
         let response = await fetch(apiUrl);
@@ -28,7 +28,7 @@ let getCityWeather = async function(city) {
             console.log("Latitude: " + lat + ", Longitude: " + lon);
             
             // use the latitude and longitude to make an API call to get the current weather
-            let weatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=baa97083d89e9450d3519e9d509f7876';
+            let weatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=baa97083d89e9450d3519e9d509f7876&units=metric';
             let weatherResponse = await fetch(weatherApiUrl);
             let weatherData = await weatherResponse.json();
             // Pull relevant data from the API: temp, humidity, wind speed, and icon
@@ -40,9 +40,18 @@ let getCityWeather = async function(city) {
             let currentWindSpeed = weatherData.wind.speed;
             let currentIcon = weatherData.weather[0].icon;
             console.log(currentTemperture, currentHumidity, currentWindSpeed, currentIcon);
+            //add function to dynamically display currentDate, currentTemperture, currentHumidity, currentWindSpeed, and currentIcon to the #current-weather div
+            currentWeatherEl.innerHTML = `
+            <p>Date: ${currentDate}</p>
+            <p>Temperature: ${currentTemperture}°C</p>
+            <p>Humidity: ${currentHumidity}%</p>
+            <p>Wind Speed: ${currentWindSpeed}m/s</p>
+            <img src="http://openweathermap.org/img/wn/${currentIcon}@2x.png">`;
+
+
 
             // use the latitude and longitude to make an API call to get the 5 day forecast
-            let forecastApiUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=baa97083d89e9450d3519e9d509f7876';
+            let forecastApiUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=baa97083d89e9450d3519e9d509f7876&units=metric';
             let forecastResponse = await fetch(forecastApiUrl);
             let forecastData = await forecastResponse.json();
             // Pull relevant data from the API: temp, humidity, wind speed, and icon for each day
@@ -63,6 +72,9 @@ let getCityWeather = async function(city) {
                 console.log("Humidity: " + forecastHumidity);
                 console.log("Wind Speed: " + forecastWindSpeed);
                 console.log("Icon: " + forecastIcon);
+
+                
+
             }
         } else {
             throw new Error("Error: " + response.statusText);
@@ -71,5 +83,7 @@ let getCityWeather = async function(city) {
         console.log(error);
     }
 };
+
+
 
 searchFormEl.addEventListener('submit', formSubmitHandler);
