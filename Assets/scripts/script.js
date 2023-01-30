@@ -114,7 +114,7 @@ let clearPreviousForecast = function() {
 let clearPreviousCurrent = function() {
     currentWeatherEl.innerHTML = "";
 };
-
+// Create the history buttons
 function createHistoryButtons() {
     let cities = JSON.parse(localStorage.getItem("cities")) || []
     historyEl.innerHTML = "";
@@ -129,8 +129,10 @@ function createHistoryButtons() {
         historyEl.appendChild(historyBtn);
     });
 }
-
-
+// Load the buttons on page load/refresh
+window.onload = function() {
+    createHistoryButtons();
+};  
 
 
 
