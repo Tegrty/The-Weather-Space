@@ -83,7 +83,7 @@ let getCityWeather = async function(city) {
                 console.log("Date: " + forecastDate.toLocaleDateString()); //converts the date object to a string
                 // Display the forecast data dynamically in #future-weather
                 $(forecastWeatherEl).append(`
-                <div class="forecast-card col-lg">
+                <div class="forecast-card col-sm">
                     <h3>${city.toUpperCase()}</h3>
                     <h4>${forecastDate.toLocaleDateString()}</h4>
                     <p>Temperature: ${Math.round(forecastTemperture)}°C</p>
