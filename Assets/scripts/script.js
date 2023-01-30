@@ -73,21 +73,17 @@ let getCityWeather = async function(city) {
             let forecastWindSpeed = forecastData.list[0].wind.speed;
             let forecastIcon = forecastData.list[0].weather[0].icon;
             console.log(forecastTemperture, forecastHumidity, forecastWindSpeed, forecastIcon);
-            // Loop through the forecast data to get the data for each day. Incrementing by 8 because the API returns the forecast for every 3 hours. 8*3 = 24 hours
-            for (let i = 0; i < forecastData.list.length; i += 8) {
+            // Loop through the forecast data to get the data for each day. Incrementing by 8 because the API returns the forecast for every 3 hours. 8*3 = 24 hours. 
+            for (let i = 0; i < forecastData.list.length; i += 8) { // forecastData.list.length is 40, so this loop will run 5 times
                 let forecastDate = new Date(forecastData.list[i].dt_txt); //converts the date from the API to a readable object
                 let forecastTemperture = forecastData.list[i].main.temp;
                 let forecastHumidity = forecastData.list[i].main.humidity;
                 let forecastWindSpeed = forecastData.list[i].wind.speed;
                 let forecastIcon = forecastData.list[i].weather[0].icon;
                 console.log("Date: " + forecastDate.toLocaleDateString()); //converts the date object to a string
-                console.log("Temperature: " + forecastTemperture);
-                console.log("Humidity: " + forecastHumidity);
-                console.log("Wind Speed: " + forecastWindSpeed);
-                console.log("Icon: " + forecastIcon);
                 // Display the forecast data dynamically in #future-weather
                 $(forecastWeatherEl).append(`
-                <div class="forecast-card col-sm">
+                <div class="forecast-card col-lg">
                     <h3>${city.toUpperCase()}</h3>
                     <h4>${forecastDate.toLocaleDateString()}</h4>
                     <p>Temperature: ${Math.round(forecastTemperture)}°C</p>
