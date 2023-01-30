@@ -4,19 +4,29 @@ let currentWeatherEl = document.querySelector('#current-weather');
 let futureWeatherEl = document.querySelector('#future-weather');
 let searchBtn = document.querySelector('#searchBtn');
 let forecastWeatherEl = document.querySelector('#forecast-weather');
+let historyEl = document.querySelector('#history');
 
 let formSubmitHandler = function(event) {
     event.preventDefault();
     clearPreviousForecast();
+    clearPreviousCurrent();
     let city = cityInputEl.value.trim();
-    console.log(city);
     if (city) {
+        let cities = JSON.parse(localStorage.getItem("cities")) || [] // First get an array of cities from local storage, if there are none, create an empty array and add the city to it
+        if(!cities.includes(city)){
+            cities.push(city);
+            localStorage.setItem("cities", JSON.stringify(cities));
+        }
         getCityWeather(city);
         cityInputEl.value = "";
+        createHistoryButtons();
     } else {
         alert("Please enter a valid City");
     }
 };
+
+
+
 // Fetching the weather data from the API - aync function allows the use of await
 let getCityWeather = async function(city) {
     let apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=5&appid=baa97083d89e9450d3519e9d509f7876&units=metric";
@@ -95,9 +105,33 @@ let getCityWeather = async function(city) {
         console.log(error);
     }
 };
-
+// Clear the previous forecast data
 let clearPreviousForecast = function() {
     forecastWeatherEl.innerHTML = "";
 };
+
+//clear the previous current weather data (adding this because clearPreviousForecast created latency when a new sarch is made, so i'm creating latency in the current search as well)
+let clearPreviousCurrent = function() {
+    currentWeatherEl.innerHTML = "";
+};
+
+function createHistoryButtons() {
+    let cities = JSON.parse(localStorage.getItem("cities")) || []
+    historyEl.innerHTML = "";
+    cities.forEach(function(city) {
+        let historyBtn = document.createElement("button");
+        historyBtn.innerHTML = city;
+        historyBtn.addEventListener("click", function() {
+            getCityWeather(city);
+            clearPreviousForecast();
+            clearPreviousCurrent();
+        });
+        historyEl.appendChild(historyBtn);
+    });
+}
+
+
+
+
 
 searchFormEl.addEventListener('submit', formSubmitHandler);
