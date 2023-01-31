@@ -7,7 +7,7 @@ The weather space is a response we application designed to display the weather o
 ---
 ## How does it work?
 
-Simple! click the link [here](https://tegrty.github.io/the-weather-space/), type your city name into the search field and you're set!
+Simple! click the link [here](https://tegrty.github.io/The-Weather-Space/), type your city name into the search field and you're set!
 
 ![image](/Assets/Images/the-weather-space.gif)
 
