@@ -5,6 +5,7 @@ let futureWeatherEl = document.querySelector('#future-weather');
 let searchBtn = document.querySelector('#searchBtn');
 let forecastWeatherEl = document.querySelector('#forecast-weather');
 let historyEl = document.querySelector('#history');
+let forecastHeader = document.querySelector('.forecast-header');
 
 let formSubmitHandler = function(event) {
     event.preventDefault();
@@ -59,7 +60,9 @@ let getCityWeather = async function(city) {
             <p>Temperature: ${Math.round(currentTemperture)}°C</p>
             <p>Humidity: ${currentHumidity}%</p>
             <p>Wind Speed: ${currentWindSpeed}m/s</p>
-            <img src="http://openweathermap.org/img/wn/${currentIcon}@2x.png">`;
+            <img src="http://openweathermap.org/img/wn/${currentIcon}@2x.png">;`
+            forecastHeader.innerHTML = `<h2>5-Day Forecast:</h2>`
+
 
 
 

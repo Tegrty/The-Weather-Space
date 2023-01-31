@@ -37,6 +37,7 @@
     margin: 10px;
     opacity: .7;
     text-align: center;
+    padding: -3px 453px;
 }
 
 .forecast-card p {
@@ -105,9 +106,8 @@
 
 
 body {
-  background: url('/Assets/Images/pikrepo.jpg');
+  background: url(/Assets/Images/pikrepo.jpg);
   background-size: cover;
-  background-repeat: no-repeat;
   font-family: 'Orbitron', "Audiowide", sans-serif;
   
 }
@@ -123,4 +123,18 @@ body {
 
 #searchBtn:hover {
   box-shadow: 0 0 30px var(--purple);
+}
+
+.forecast-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 25%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: white;
+
+
 }
