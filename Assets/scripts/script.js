@@ -30,7 +30,7 @@ let formSubmitHandler = function(event) {
 
 // Fetching the weather data from the API - aync function allows the use of await
 let getCityWeather = async function(city) {
-    let apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=5&appid=baa97083d89e9450d3519e9d509f7876&units=metric";
+    let apiUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=5&appid=baa97083d89e9450d3519e9d509f7876&units=metric";
 
     try {
         let response = await fetch(apiUrl);
